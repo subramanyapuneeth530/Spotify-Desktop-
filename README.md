@@ -33,7 +33,60 @@ This project is split into:
 ---
 
 ## Repo structure (current)
+```
+├── backend/
+│ ├── main.py # FastAPI routes (HTTP API)
+│ ├── spotify_client.py # Spotify OAuth + Spotipy wrapper
+│ ├── .env # (local) Spotify credentials ❌ don't commit
+│ └── .spotify_token_cache # (local) OAuth token cache ❌ don't commit
+│
+└── GUI/
+├── player.py # PySide6 desktop UI
+└── api_client.py # HTTP client for backend
+```
 
+## Requirements
+
+- **Python 3.9+**
+- A Spotify account
+- A Spotify Developer App (Client ID / Client Secret)
+
+Python packages (installed via pip):
+- `fastapi`
+- `uvicorn`
+- `pydantic`
+- `spotipy`
+- `python-dotenv`
+- `requests`
+- `PySide6`
+
+---
+
+## Spotify Developer App setup
+
+1. Go to the Spotify Developer Dashboard and create an app.
+2. Copy your:
+   - `SPOTIFY_CLIENT_ID`
+   - `SPOTIFY_CLIENT_SECRET`
+3. In the app settings, add a Redirect URI matching your `.env` value, for example:
+   - `http://localhost:8888/callback`
+
+> Redirect URI **must match exactly** or login will fail.
+
+---
+
+## Environment variables
+
+Create a file at:
+
+`backend/.env`
+
+Example:
+
+```env
+SPOTIFY_CLIENT_ID=your_client_id_here
+SPOTIFY_CLIENT_SECRET=your_client_secret_here
+SPOTIFY_REDIRECT_URI=http://localhost:8888/callback
 
 
 <img width="799" height="749" alt="image" src="https://github.com/user-attachments/assets/94dc5418-9845-4f22-948d-bbadd8add803" />
